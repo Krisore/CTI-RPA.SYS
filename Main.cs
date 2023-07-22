@@ -1,64 +1,119 @@
-using System.Linq;
+
 using System.Runtime.InteropServices;
 using Gma.System.MouseKeyHook;
-using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using CTI_RPA.MODEL;
+using Point = System.Drawing.Point;
+
 namespace CTI_RPA.SYS
 {
-    public partial class Main : Form
+    public partial class MainForm : System.Windows.Forms.Form
     {
-       
-        [DllImport("user32.dll", SetLastError = true)]
-        public static extern bool SetCursorPos(int x, int y);
-        private IKeyboardMouseEvents _keyboardEvents;
-        private readonly List<Point> cursorPositions = new List<Point>();
-        public Main()
+        private IKeyboardMouseEvents _mGlobalHook;
+        private List<MacroAction> _macroActions = new List<MacroAction>();
+        readonly BindingSource _bindingSource = new BindingSource();
+        StringBuilder _currentWord = new StringBuilder();
+        DateTime lastKetPress = DateTime.MinValue;
+        public MainForm()
         {
             InitializeComponent();
+            macroLog.DataSource = _bindingSource;
+            _bindingSource.DataSource = _macroActions;
         }
-        public void Subscribe(IKeyboardMouseEvents events)
+        private void MainForm_Load_1(object sender, EventArgs e)
         {
-            _keyboardEvents = events;
-            _keyboardEvents.MouseMove += Mouse_Events_MouseMove;
-            _keyboardEvents.MouseDown += Mouse_Events_MouseDown;
-            
+            if (macroLog.DataSource != null) return;
+            PlayButton.Enabled = false;
+            stopButton.Enabled = false;
+        }
+        private void RecordButton_Click(object sender, EventArgs e)
+        {
+            RecordButton.Enabled = false;
+            this.WindowState = FormWindowState.Minimized;
+            PopStartRecord popStartRecord = new PopStartRecord();
+            popStartRecord.TopMost = true;
+            popStartRecord.StartPosition = FormStartPosition.Manual;
+            popStartRecord.Location = new Point(Screen.PrimaryScreen.Bounds.Width - popStartRecord.Width, Screen.PrimaryScreen.Bounds.Height - popStartRecord.Height);
+            popStartRecord.ShowDialog(this);
+            if (popStartRecord.DialogResult == DialogResult.OK)
+            {
+                PlayButton.Enabled = true;
+                stopButton.Enabled = true;
+                Subscribe();
+            }
+            else
+            {
+                RecordButton.Enabled = true;
+            }
+            popStartRecord.Dispose();
+            this.WindowState = FormWindowState.Normal;
+
         }
 
-        private void Mouse_Events_MouseDown(object? sender, MouseEventArgs e)
+        private void Subscribe()
         {
-            Point cursorPosition = Cursor.Position;
-            cursorPositions.Add(cursorPosition);
-            label2.Text = $"x = {cursorPosition.X:0000}, y = {cursorPosition.Y:0000}";
+            _mGlobalHook = Hook.GlobalEvents();
+            _mGlobalHook.KeyPress += GlobalHookKeyPress;
+            _mGlobalHook.MouseDownExt += GlobalHookMouseDownExt;
+            //_mGlobalHook.KeyDown += GlobalHookKeyDown;
         }
 
-        private void Mouse_Events_MouseMove(object? sender, MouseEventArgs e)
+        //private void GlobalHookKeyDown(object? sender, KeyEventArgs e)
+        //{
+        //    var macroAction = new MacroAction()
+        //    {
+        //        OnType = EventType.Keyboard,
+        //        EventName = $"KeyPress",
+        //        EventParameters = $"{e.KeyData}",
+        //        Value = $"{e.KeyCode}",
+        //        Comment = ""
+        //    };
+        //    _macroActions.Add(macroAction);
+        //    bindingSource.ResetBindings(false);
+        //}
+
+        private void GlobalHookKeyPress(object? sender, KeyPressEventArgs e)
         {
-            label1.Text = $"x = {e.X:0000}, y = {e.Y:0000}";
+
+            var macroAction = new MacroAction()
+                {
+                    OnType = EventType.Keyboard,
+                    EventName = $"KeyPress",
+                    EventParameters = $"{e.KeyChar}",
+                    Value = $"{e.KeyChar}",
+                    Comment = ""
+                };
+                _macroActions.Add(macroAction);
+            _bindingSource.ResetBindings(false);
         }
 
-        public void UnSubscribe()
+        private void Unsubscribe()
         {
-            if (_keyboardEvents == null) return;
-            _keyboardEvents.MouseMove -= Mouse_Events_MouseMove;
-            _keyboardEvents.Dispose();
-            _keyboardEvents = null;
+            _mGlobalHook.KeyPress -= GlobalHookKeyPress;
+            _mGlobalHook.MouseDownExt -= GlobalHookMouseDownExt;
+            _mGlobalHook.Dispose();
         }
 
-        private void addObject_Click(object sender, EventArgs e)
+        private void GlobalHookMouseDownExt(object? sender, MouseEventExtArgs e)
         {
-            SetCursorPos(0, 0);
-            label1.Text = $"x = {MousePosition.X:0000}, y = {MousePosition.Y:0000}";
-            label2.Text = $"x = {MousePosition.X:0000}, y = {MousePosition.Y:0000}";
+           
+            var macroAction = new MacroAction()
+            {
+                OnType = EventType.MouseClick,
+                EventName = $"{e.Button}",
+                EventParameters = $"{e.X}, {e.Y}",
+                Value = $"{e.Timestamp:##.###}",
+                Comment = ""
+            };
+            _macroActions.Add(macroAction);
+            _bindingSource.ResetBindings(false);
         }
 
-        private void Main_Load(object sender, EventArgs e)
-        {
-            UnSubscribe();
-            Subscribe(Hook.GlobalEvents());
-        }
 
-        private void Main_FormClosing(object sender, FormClosingEventArgs e)
+        private void stopButton_Click(object sender, EventArgs e)
         {
-            UnSubscribe();
+            Unsubscribe();
         }
     }
 }
