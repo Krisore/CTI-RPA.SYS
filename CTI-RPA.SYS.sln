@@ -5,10 +5,6 @@ VisualStudioVersion = 17.1.32407.343
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CTI-RPA.SYS", "CTI-RPA.SYS.csproj", "{CCD1AF3F-B3A5-4297-8A12-9086FD9B79D3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CTI-RPA.MODEL", "..\CTI-RPA.MODEL\CTI-RPA.MODEL.csproj", "{FBF29907-DC7A-49D6-9579-99BF52CA4334}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CTI-RPA.SERVICES", "..\CTI-RPA.SERVICES\CTI-RPA.SERVICES.csproj", "{F4AE239F-9A8B-4AF6-BCB8-318BAED742D2}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,14 +15,6 @@ Global
 		{CCD1AF3F-B3A5-4297-8A12-9086FD9B79D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCD1AF3F-B3A5-4297-8A12-9086FD9B79D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CCD1AF3F-B3A5-4297-8A12-9086FD9B79D3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FBF29907-DC7A-49D6-9579-99BF52CA4334}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FBF29907-DC7A-49D6-9579-99BF52CA4334}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FBF29907-DC7A-49D6-9579-99BF52CA4334}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FBF29907-DC7A-49D6-9579-99BF52CA4334}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F4AE239F-9A8B-4AF6-BCB8-318BAED742D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F4AE239F-9A8B-4AF6-BCB8-318BAED742D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F4AE239F-9A8B-4AF6-BCB8-318BAED742D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F4AE239F-9A8B-4AF6-BCB8-318BAED742D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

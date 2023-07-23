@@ -40,15 +40,16 @@
             WatchToolStrip = new ToolStrip();
             PlayButton = new FontAwesome.Sharp.IconToolStripButton();
             RecordButton = new FontAwesome.Sharp.IconToolStripButton();
-            stopButton = new FontAwesome.Sharp.IconToolStripButton();
-            toolStripSeparator4 = new ToolStripSeparator();
-            insertScriptButton = new FontAwesome.Sharp.IconToolStripButton();
+            StopButton = new FontAwesome.Sharp.IconToolStripButton();
+            Divider = new ToolStripSeparator();
+            InsertScriptButton = new FontAwesome.Sharp.IconToolStripButton();
+            AddStepButton = new FontAwesome.Sharp.IconToolStripButton();
+            SelectObjectButton = new FontAwesome.Sharp.IconToolStripButton();
             Playback = new TabPage();
             iconDropDownButton1 = new FontAwesome.Sharp.IconDropDownButton();
             macroLog = new DataGridView();
             splitContainer1 = new SplitContainer();
             toolStrip2 = new ToolStrip();
-            Column1 = new DataGridViewTextBoxColumn();
             MainToolStrip.SuspendLayout();
             TabControl.SuspendLayout();
             RecordTab.SuspendLayout();
@@ -139,7 +140,7 @@
             // 
             WatchToolStrip.Font = new Font("Fira Code", 8.999999F, FontStyle.Regular, GraphicsUnit.Point);
             WatchToolStrip.GripStyle = ToolStripGripStyle.Hidden;
-            WatchToolStrip.Items.AddRange(new ToolStripItem[] { PlayButton, RecordButton, stopButton, toolStripSeparator4, insertScriptButton });
+            WatchToolStrip.Items.AddRange(new ToolStripItem[] { PlayButton, RecordButton, StopButton, Divider, InsertScriptButton, AddStepButton, SelectObjectButton });
             WatchToolStrip.Location = new Point(3, 4);
             WatchToolStrip.Name = "WatchToolStrip";
             WatchToolStrip.Size = new Size(1118, 76);
@@ -179,40 +180,70 @@
             RecordButton.TextImageRelation = TextImageRelation.ImageAboveText;
             RecordButton.Click += RecordButton_Click;
             // 
-            // stopButton
+            // StopButton
             // 
-            stopButton.Font = new Font("Fira Code", 8.999999F, FontStyle.Regular, GraphicsUnit.Point);
-            stopButton.ForeColor = Color.Black;
-            stopButton.IconChar = FontAwesome.Sharp.IconChar.Square;
-            stopButton.IconColor = Color.FromArgb(13, 114, 194);
-            stopButton.IconFont = FontAwesome.Sharp.IconFont.Solid;
-            stopButton.ImageScaling = ToolStripItemImageScaling.None;
-            stopButton.ImageTransparentColor = Color.Magenta;
-            stopButton.Name = "stopButton";
-            stopButton.Padding = new Padding(10, 0, 10, 0);
-            stopButton.Size = new Size(72, 73);
-            stopButton.Text = "Stop";
-            stopButton.TextImageRelation = TextImageRelation.ImageAboveText;
-            stopButton.Click += stopButton_Click;
+            StopButton.Font = new Font("Fira Code", 8.999999F, FontStyle.Regular, GraphicsUnit.Point);
+            StopButton.ForeColor = Color.Black;
+            StopButton.IconChar = FontAwesome.Sharp.IconChar.Square;
+            StopButton.IconColor = Color.FromArgb(13, 114, 194);
+            StopButton.IconFont = FontAwesome.Sharp.IconFont.Solid;
+            StopButton.ImageScaling = ToolStripItemImageScaling.None;
+            StopButton.ImageTransparentColor = Color.Magenta;
+            StopButton.Name = "StopButton";
+            StopButton.Padding = new Padding(10, 0, 10, 0);
+            StopButton.Size = new Size(72, 73);
+            StopButton.Text = "Stop";
+            StopButton.TextImageRelation = TextImageRelation.ImageAboveText;
+            StopButton.Click += stopButton_Click;
             // 
-            // toolStripSeparator4
+            // Divider
             // 
-            toolStripSeparator4.Name = "toolStripSeparator4";
-            toolStripSeparator4.Size = new Size(6, 76);
+            Divider.Margin = new Padding(15, 0, 15, 0);
+            Divider.Name = "Divider";
+            Divider.Size = new Size(6, 76);
             // 
-            // insertScriptButton
+            // InsertScriptButton
             // 
-            insertScriptButton.Alignment = ToolStripItemAlignment.Right;
-            insertScriptButton.ForeColor = Color.Black;
-            insertScriptButton.IconChar = FontAwesome.Sharp.IconChar.Scroll;
-            insertScriptButton.IconColor = Color.FromArgb(0, 192, 192);
-            insertScriptButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            insertScriptButton.ImageScaling = ToolStripItemImageScaling.None;
-            insertScriptButton.ImageTransparentColor = Color.DarkViolet;
-            insertScriptButton.Name = "insertScriptButton";
-            insertScriptButton.Size = new Size(104, 73);
-            insertScriptButton.Text = "Insert Script";
-            insertScriptButton.TextImageRelation = TextImageRelation.ImageAboveText;
+            InsertScriptButton.Alignment = ToolStripItemAlignment.Right;
+            InsertScriptButton.ForeColor = Color.Black;
+            InsertScriptButton.IconChar = FontAwesome.Sharp.IconChar.Scroll;
+            InsertScriptButton.IconColor = Color.FromArgb(0, 192, 192);
+            InsertScriptButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            InsertScriptButton.ImageScaling = ToolStripItemImageScaling.None;
+            InsertScriptButton.ImageTransparentColor = Color.DarkViolet;
+            InsertScriptButton.Name = "InsertScriptButton";
+            InsertScriptButton.Size = new Size(104, 73);
+            InsertScriptButton.Text = "Insert Script";
+            InsertScriptButton.TextImageRelation = TextImageRelation.ImageAboveText;
+            // 
+            // AddStepButton
+            // 
+            AddStepButton.Font = new Font("Fira Code", 8.249999F, FontStyle.Regular, GraphicsUnit.Point);
+            AddStepButton.ForeColor = Color.Black;
+            AddStepButton.IconChar = FontAwesome.Sharp.IconChar.Add;
+            AddStepButton.IconColor = Color.Black;
+            AddStepButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            AddStepButton.IconSize = 51;
+            AddStepButton.ImageScaling = ToolStripItemImageScaling.None;
+            AddStepButton.ImageTransparentColor = Color.Magenta;
+            AddStepButton.Name = "AddStepButton";
+            AddStepButton.Size = new Size(68, 73);
+            AddStepButton.Text = "Add Step";
+            AddStepButton.TextImageRelation = TextImageRelation.ImageAboveText;
+            // 
+            // SelectObjectButton
+            // 
+            SelectObjectButton.ForeColor = Color.Black;
+            SelectObjectButton.IconChar = FontAwesome.Sharp.IconChar.ObjectUngroup;
+            SelectObjectButton.IconColor = Color.Black;
+            SelectObjectButton.IconFont = FontAwesome.Sharp.IconFont.Solid;
+            SelectObjectButton.IconSize = 50;
+            SelectObjectButton.ImageScaling = ToolStripItemImageScaling.None;
+            SelectObjectButton.ImageTransparentColor = Color.Magenta;
+            SelectObjectButton.Name = "SelectObjectButton";
+            SelectObjectButton.Size = new Size(104, 73);
+            SelectObjectButton.Text = "Select Object";
+            SelectObjectButton.TextImageRelation = TextImageRelation.ImageAboveText;
             // 
             // Playback
             // 
@@ -236,16 +267,16 @@
             // 
             // macroLog
             // 
+            macroLog.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             macroLog.BackgroundColor = Color.FromArgb(224, 224, 224);
             macroLog.BorderStyle = BorderStyle.None;
             macroLog.CellBorderStyle = DataGridViewCellBorderStyle.None;
-            macroLog.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            macroLog.Columns.AddRange(new DataGridViewColumn[] { Column1 });
             macroLog.Dock = DockStyle.Fill;
             macroLog.GridColor = SystemColors.ActiveCaptionText;
             macroLog.Location = new Point(0, 0);
             macroLog.Margin = new Padding(3, 4, 3, 4);
             macroLog.Name = "macroLog";
+            macroLog.ReadOnly = true;
             macroLog.RowTemplate.Height = 25;
             macroLog.Size = new Size(769, 615);
             macroLog.TabIndex = 2;
@@ -278,11 +309,6 @@
             toolStrip2.Size = new Size(26, 615);
             toolStrip2.TabIndex = 0;
             toolStrip2.Text = "toolStrip2";
-            // 
-            // Column1
-            // 
-            Column1.HeaderText = "";
-            Column1.Name = "Column1";
             // 
             // MainForm
             // 
@@ -335,11 +361,12 @@
         private ToolStrip WatchToolStrip;
         private FontAwesome.Sharp.IconToolStripButton PlayButton;
         private FontAwesome.Sharp.IconToolStripButton RecordButton;
-        private FontAwesome.Sharp.IconToolStripButton stopButton;
-        private ToolStripSeparator toolStripSeparator4;
-        private FontAwesome.Sharp.IconToolStripButton insertScriptButton;
+        private FontAwesome.Sharp.IconToolStripButton StopButton;
+        private ToolStripSeparator Divider;
+        private FontAwesome.Sharp.IconToolStripButton InsertScriptButton;
         private SplitContainer splitContainer1;
         private ToolStrip toolStrip2;
-        private DataGridViewTextBoxColumn Column1;
+        private FontAwesome.Sharp.IconToolStripButton AddStepButton;
+        private FontAwesome.Sharp.IconToolStripButton SelectObjectButton;
     }
 }
