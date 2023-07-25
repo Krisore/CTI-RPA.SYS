@@ -18,6 +18,7 @@ namespace CTI_RPA.SYS
         DateTime _lastKetPress = DateTime.MinValue;
         public MainForm()
         {
+            _macroService = macroService;
             InitializeComponent();
             macroLog.DataSource = _bindingSource;
             _bindingSource.DataSource = _macroActions;
@@ -98,5 +99,8 @@ namespace CTI_RPA.SYS
             RecordButton.Enabled = true;
             Unsubscribe();
         }
+        //TODO: Minimize or Hide the Main Form while recording or playback
+        //TODO: Add Step for manual edit of script
+        //TODO: Select Object for manual select of step
     }
 }
