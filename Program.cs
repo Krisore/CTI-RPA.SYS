@@ -1,3 +1,7 @@
+using CTI_RPA.SYS.Services;
+using CTI_RPA.SYS.Services.Interface;
+using Gma.System.MouseKeyHook;
+
 namespace CTI_RPA.SYS
 {
     internal static class Program
@@ -11,7 +15,11 @@ namespace CTI_RPA.SYS
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new Main());
+            LoaderIntro loaderIntro = new LoaderIntro();
+            Application.Run(loaderIntro);
+
+            MainForm mainForm = new MainForm();
+            Application.Run(mainForm);
         }
     }
 }
