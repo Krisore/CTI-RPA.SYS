@@ -1,106 +1,114 @@
 
-using Gma.System.MouseKeyHook;
-using System.Text;
-using CTI_RPA.SYS.Model;
-using Point = System.Drawing.Point;
+using CTI_RPA.SYS.Services.Interface;
 
 namespace CTI_RPA.SYS
 {
-    public partial class MainForm : System.Windows.Forms.Form
+    public partial class MainForm : Form
     {
         /// <summary>
         ///  Represents the main form of the CTI_RPA application for recording macro actions.
         /// </summary>
-        private IKeyboardMouseEvents _mGlobalHook;
-        private List<MacroAction> _macroActions = new();
-        readonly BindingSource _bindingSource = new();
-        StringBuilder _currentWord = new();
-        DateTime _lastKetPress = DateTime.MinValue;
-        public MainForm()
+        public readonly BindingSource BindingSource = new();
+        private readonly IMacroService _macroService;
+        public MainForm(IMacroService macroService)
         {
             _macroService = macroService;
             InitializeComponent();
-            macroLog.DataSource = _bindingSource;
-            _bindingSource.DataSource = _macroActions;
-            _bindingSource.ResetBindings(false);
+            BindingSource.DataSource = _macroService.MacroActionsBindingSource;
+            macroLog.DataSource = BindingSource;
+            BindingSource.ResetBindings(false);
         }
         private void MainForm_Load_1(object sender, EventArgs e)
         {
-            if (macroLog.DataSource != null) return;
+            if (_macroService.MacroActions.Count() != 0) return;
             PlayButton.Enabled = false;
             StopButton.Enabled = false;
+            ClearButton.Enabled = false;
         }
-        private void RecordButton_Click(object sender, EventArgs e)
+        private DialogResult PopDialogResult()
         {
-            RecordButton.Enabled = false;
-            this.WindowState = FormWindowState.Minimized;
-            PopStartRecord popStartRecord = new PopStartRecord();
+            var popStartRecord = new PopStartRecord();
             popStartRecord.TopMost = true;
             popStartRecord.StartPosition = FormStartPosition.Manual;
             popStartRecord.Location = new Point(Screen.PrimaryScreen.Bounds.Width - popStartRecord.Width, Screen.PrimaryScreen.Bounds.Height - popStartRecord.Height);
             popStartRecord.ShowDialog(this);
-            if (popStartRecord.DialogResult == DialogResult.OK)
+            popStartRecord.Dispose();
+            return popStartRecord.DialogResult;
+        }
+        private void RecordButton_Click(object sender, EventArgs e)
+        {
+            RecordButton.Enabled = false;
+            WindowState = FormWindowState.Minimized;
+            macroLog.ReadOnly = true;
+            if (PopDialogResult() == DialogResult.OK)
             {
+                ClearButton.Enabled = false;
                 PlayButton.Enabled = true;
                 StopButton.Enabled = true;
-                Subscribe();
+                this.WindowState = FormWindowState.Minimized;
+                _macroService.Subscribe();
             }
             else
             {
                 RecordButton.Enabled = true;
+                WindowState = FormWindowState.Normal;
             }
-            popStartRecord.Dispose();
-            this.WindowState = FormWindowState.Normal;
-
         }
-        private void Subscribe()
-        {
-            _mGlobalHook = Hook.GlobalEvents();
-            _mGlobalHook.KeyPress += GlobalHookKeyPress;
-            _mGlobalHook.MouseDownExt += GlobalHookMouseDownExt;
-        }
-        private void GlobalHookKeyPress(object? sender, KeyPressEventArgs e)
-        {
-
-            var macroAction = new MacroAction()
-            {
-                MacroActionType = MacroActionType.KeyPress,
-                EventName = $@"KeyPress",
-                EventParameters = $"{e.KeyChar}",
-                Value = $"{e.KeyChar}",
-                Comment = ""
-            };
-            _macroActions.Add(macroAction);
-            _bindingSource.ResetBindings(false);
-        }
-
-        private void Unsubscribe()
-        {
-            _mGlobalHook.KeyPress -= GlobalHookKeyPress;
-            _mGlobalHook.MouseDownExt -= GlobalHookMouseDownExt;
-            _mGlobalHook.Dispose();
-        }
-
-        private void GlobalHookMouseDownExt(object? sender, MouseEventExtArgs e)
-        {
-            var macroAction = new MacroAction()
-            {
-                MacroActionType = MacroActionType.MouseClick,
-                EventName = $"{e.Button}",
-                EventParameters = $"{e.X}, {e.Y}",
-                Value = $"{e.Timestamp}",
-                Comment = ""
-            };
-            _macroActions.Add(macroAction);
-            _bindingSource.ResetBindings(false);
-        }
-        private void stopButton_Click(object sender, EventArgs e)
+        private void StopButton_Click(object sender, EventArgs e)
         {
             RecordButton.Enabled = true;
-            Unsubscribe();
+            ClearButton.Enabled = true;
+            StopButton.Enabled = false;
+            macroLog.ReadOnly = false;
+            _macroService.Unsubscribe();
         }
-        //TODO: Minimize or Hide the Main Form while recording or playback
-        //TODO: Add Step for manual edit of script
-        //TODO: Select Object for manual select of step
+        private void PlayButton_Click(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Minimized;
+            RecordButton.Enabled = true;
+            StopButton.Enabled = true;
+            _macroService.PlayMacroActions();
+            StopButton.Enabled = false;
+        }
+        private void ClearButton_Click(object sender, EventArgs e)
+        {
+            _macroService.ClearMacroActions();
+            if (_macroService.IsMacroActionsNull())
+            {
+                StopButton.Enabled = false;
+                PlayButton.Enabled = false;
+                ClearButton.Enabled = false;
+            }
+            BindingSource.ResetBindings(false);
+
+        }
+        private void macroLog_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            if (e.Context == DataGridViewDataErrorContexts.Formatting)
+            {
+                // Handle formatting errors (e.g., converting data to display values)
+                // You can display a message to the user or log the error as needed
+                MessageBox.Show(@"Data formatting error occurred. Please check the entered values.", @"Data Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (e.Exception is FormatException)
+            {
+                // Handle data conversion errors (e.g., converting user input to the data type of the cell)
+                // You can display a message to the user or log the error as needed
+                MessageBox.Show(@"Invalid data format. Please enter a valid value.", @"Data Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                // Handle other data errors (e.g., data validation errors)
+                // You can display a message to the user or log the error as needed
+                MessageBox.Show(@"An error occurred while processing data.", @"Data Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            // Mark the error as handled to prevent further default error handling
+            e.ThrowException = false;
+        }
+
+        //TODO: Minimize or Hide the Main Form while recording or playback. 
+        //TODO: Add a key shortcut to stop the recording
+        //TODO: Add Step for manual edit of script.
+        //TODO: Select Object for manual select of step.
     }
 }

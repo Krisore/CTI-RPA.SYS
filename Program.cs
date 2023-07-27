@@ -12,13 +12,17 @@ namespace CTI_RPA.SYS
         [STAThread]
         private static void Main()
         {
+            // Note: The main entry point for the application.
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
+            
             ApplicationConfiguration.Initialize();
-            LoaderIntro loaderIntro = new LoaderIntro();
+            var loaderIntro = new LoaderIntro();
             Application.Run(loaderIntro);
 
-            MainForm mainForm = new MainForm();
+            //Main Form Initialization
+            IMacroService macroService = new MacroService(Hook.GlobalEvents());
+            var mainForm = new MainForm(macroService);
             Application.Run(mainForm);
         }
     }

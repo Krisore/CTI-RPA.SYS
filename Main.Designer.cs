@@ -38,18 +38,43 @@
             TabControl = new TabControl();
             RecordTab = new TabPage();
             WatchToolStrip = new ToolStrip();
-            PlayButton = new FontAwesome.Sharp.IconToolStripButton();
-            RecordButton = new FontAwesome.Sharp.IconToolStripButton();
-            StopButton = new FontAwesome.Sharp.IconToolStripButton();
+            SaveScript = new FontAwesome.Sharp.IconToolStripButton();
+            RightDivider1 = new ToolStripSeparator();
             Divider = new ToolStripSeparator();
+            StopButton = new FontAwesome.Sharp.IconToolStripButton();
+            RecordButton = new FontAwesome.Sharp.IconToolStripButton();
             InsertScriptButton = new FontAwesome.Sharp.IconToolStripButton();
             AddStepButton = new FontAwesome.Sharp.IconToolStripButton();
             SelectObjectButton = new FontAwesome.Sharp.IconToolStripButton();
+            Divider1 = new ToolStripSeparator();
+            ClearButton = new FontAwesome.Sharp.IconToolStripButton();
+            Divider2 = new ToolStripSeparator();
+            PlayButton = new FontAwesome.Sharp.IconToolStripButton();
+            RightDivider = new ToolStripSeparator();
             Playback = new TabPage();
             iconDropDownButton1 = new FontAwesome.Sharp.IconDropDownButton();
             macroLog = new DataGridView();
             splitContainer1 = new SplitContainer();
             toolStrip2 = new ToolStrip();
+            toolStripContainer1 = new ToolStripContainer();
+            panel1 = new Panel();
+            toolStrip1 = new ToolStrip();
+            newToolStripButton = new ToolStripButton();
+            openToolStripButton = new ToolStripButton();
+            saveToolStripButton = new ToolStripButton();
+            printToolStripButton = new ToolStripButton();
+            toolStripSeparator = new ToolStripSeparator();
+            cutToolStripButton = new ToolStripButton();
+            copyToolStripButton = new ToolStripButton();
+            pasteToolStripButton = new ToolStripButton();
+            toolStripSeparator2 = new ToolStripSeparator();
+            helpToolStripButton = new ToolStripButton();
+            toolStripTextBox1 = new ToolStripTextBox();
+            iconToolStripButton1 = new FontAwesome.Sharp.IconToolStripButton();
+            toolStripSeparator3 = new ToolStripSeparator();
+            statusStrip1 = new StatusStrip();
+            StatusLabel = new ToolStripStatusLabel();
+            toolStripProgressBar1 = new ToolStripProgressBar();
             MainToolStrip.SuspendLayout();
             TabControl.SuspendLayout();
             RecordTab.SuspendLayout();
@@ -59,6 +84,12 @@
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
+            toolStripContainer1.ContentPanel.SuspendLayout();
+            toolStripContainer1.TopToolStripPanel.SuspendLayout();
+            toolStripContainer1.SuspendLayout();
+            panel1.SuspendLayout();
+            toolStrip1.SuspendLayout();
+            statusStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // MainToolStrip
@@ -140,31 +171,58 @@
             // 
             WatchToolStrip.Font = new Font("Fira Code", 8.999999F, FontStyle.Regular, GraphicsUnit.Point);
             WatchToolStrip.GripStyle = ToolStripGripStyle.Hidden;
-            WatchToolStrip.Items.AddRange(new ToolStripItem[] { PlayButton, RecordButton, StopButton, Divider, InsertScriptButton, AddStepButton, SelectObjectButton });
+            WatchToolStrip.Items.AddRange(new ToolStripItem[] { SaveScript, RightDivider1, Divider, StopButton, RecordButton, InsertScriptButton, AddStepButton, SelectObjectButton, Divider1, ClearButton, Divider2, PlayButton, RightDivider });
             WatchToolStrip.Location = new Point(3, 4);
             WatchToolStrip.Name = "WatchToolStrip";
             WatchToolStrip.Size = new Size(1118, 76);
             WatchToolStrip.TabIndex = 0;
             WatchToolStrip.Text = "toolStrip1";
             // 
-            // PlayButton
+            // SaveScript
             // 
-            PlayButton.Font = new Font("Fira Code", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            PlayButton.ForeColor = Color.Black;
-            PlayButton.IconChar = FontAwesome.Sharp.IconChar.Play;
-            PlayButton.IconColor = Color.FromArgb(101, 239, 67);
-            PlayButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            PlayButton.ImageAlign = ContentAlignment.TopCenter;
-            PlayButton.ImageScaling = ToolStripItemImageScaling.None;
-            PlayButton.ImageTransparentColor = Color.Magenta;
-            PlayButton.Name = "PlayButton";
-            PlayButton.Padding = new Padding(10, 0, 10, 0);
-            PlayButton.Size = new Size(72, 73);
-            PlayButton.Text = "Play";
-            PlayButton.TextImageRelation = TextImageRelation.ImageAboveText;
+            SaveScript.ForeColor = Color.Black;
+            SaveScript.IconChar = FontAwesome.Sharp.IconChar.FileSignature;
+            SaveScript.IconColor = Color.FromArgb(64, 64, 64);
+            SaveScript.IconFont = FontAwesome.Sharp.IconFont.Solid;
+            SaveScript.ImageScaling = ToolStripItemImageScaling.None;
+            SaveScript.ImageTransparentColor = Color.Magenta;
+            SaveScript.Name = "SaveScript";
+            SaveScript.Size = new Size(90, 73);
+            SaveScript.Text = "Save Script";
+            SaveScript.TextImageRelation = TextImageRelation.ImageAboveText;
+            // 
+            // RightDivider1
+            // 
+            RightDivider1.Alignment = ToolStripItemAlignment.Right;
+            RightDivider1.Name = "RightDivider1";
+            RightDivider1.Size = new Size(6, 76);
+            // 
+            // Divider
+            // 
+            Divider.Margin = new Padding(15, 0, 15, 0);
+            Divider.Name = "Divider";
+            Divider.Size = new Size(6, 76);
+            // 
+            // StopButton
+            // 
+            StopButton.Alignment = ToolStripItemAlignment.Right;
+            StopButton.Font = new Font("Fira Code", 8.999999F, FontStyle.Regular, GraphicsUnit.Point);
+            StopButton.ForeColor = Color.Black;
+            StopButton.IconChar = FontAwesome.Sharp.IconChar.Square;
+            StopButton.IconColor = Color.FromArgb(13, 114, 194);
+            StopButton.IconFont = FontAwesome.Sharp.IconFont.Solid;
+            StopButton.ImageScaling = ToolStripItemImageScaling.None;
+            StopButton.ImageTransparentColor = Color.Magenta;
+            StopButton.Name = "StopButton";
+            StopButton.Padding = new Padding(10, 0, 10, 0);
+            StopButton.Size = new Size(72, 73);
+            StopButton.Text = "Stop";
+            StopButton.TextImageRelation = TextImageRelation.ImageAboveText;
+            StopButton.Click += StopButton_Click;
             // 
             // RecordButton
             // 
+            RecordButton.Alignment = ToolStripItemAlignment.Right;
             RecordButton.Font = new Font("Fira Code", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             RecordButton.ForeColor = Color.Black;
             RecordButton.IconChar = FontAwesome.Sharp.IconChar.Circle;
@@ -180,34 +238,11 @@
             RecordButton.TextImageRelation = TextImageRelation.ImageAboveText;
             RecordButton.Click += RecordButton_Click;
             // 
-            // StopButton
-            // 
-            StopButton.Font = new Font("Fira Code", 8.999999F, FontStyle.Regular, GraphicsUnit.Point);
-            StopButton.ForeColor = Color.Black;
-            StopButton.IconChar = FontAwesome.Sharp.IconChar.Square;
-            StopButton.IconColor = Color.FromArgb(13, 114, 194);
-            StopButton.IconFont = FontAwesome.Sharp.IconFont.Solid;
-            StopButton.ImageScaling = ToolStripItemImageScaling.None;
-            StopButton.ImageTransparentColor = Color.Magenta;
-            StopButton.Name = "StopButton";
-            StopButton.Padding = new Padding(10, 0, 10, 0);
-            StopButton.Size = new Size(72, 73);
-            StopButton.Text = "Stop";
-            StopButton.TextImageRelation = TextImageRelation.ImageAboveText;
-            StopButton.Click += stopButton_Click;
-            // 
-            // Divider
-            // 
-            Divider.Margin = new Padding(15, 0, 15, 0);
-            Divider.Name = "Divider";
-            Divider.Size = new Size(6, 76);
-            // 
             // InsertScriptButton
             // 
-            InsertScriptButton.Alignment = ToolStripItemAlignment.Right;
             InsertScriptButton.ForeColor = Color.Black;
-            InsertScriptButton.IconChar = FontAwesome.Sharp.IconChar.Scroll;
-            InsertScriptButton.IconColor = Color.FromArgb(0, 192, 192);
+            InsertScriptButton.IconChar = FontAwesome.Sharp.IconChar.FileImport;
+            InsertScriptButton.IconColor = Color.FromArgb(64, 64, 64);
             InsertScriptButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
             InsertScriptButton.ImageScaling = ToolStripItemImageScaling.None;
             InsertScriptButton.ImageTransparentColor = Color.DarkViolet;
@@ -218,6 +253,7 @@
             // 
             // AddStepButton
             // 
+            AddStepButton.Enabled = false;
             AddStepButton.Font = new Font("Fira Code", 8.249999F, FontStyle.Regular, GraphicsUnit.Point);
             AddStepButton.ForeColor = Color.Black;
             AddStepButton.IconChar = FontAwesome.Sharp.IconChar.Add;
@@ -233,6 +269,7 @@
             // 
             // SelectObjectButton
             // 
+            SelectObjectButton.Enabled = false;
             SelectObjectButton.ForeColor = Color.Black;
             SelectObjectButton.IconChar = FontAwesome.Sharp.IconChar.ObjectUngroup;
             SelectObjectButton.IconColor = Color.Black;
@@ -244,6 +281,55 @@
             SelectObjectButton.Size = new Size(104, 73);
             SelectObjectButton.Text = "Select Object";
             SelectObjectButton.TextImageRelation = TextImageRelation.ImageAboveText;
+            // 
+            // Divider1
+            // 
+            Divider1.Name = "Divider1";
+            Divider1.Size = new Size(6, 76);
+            // 
+            // ClearButton
+            // 
+            ClearButton.ForeColor = Color.Black;
+            ClearButton.IconChar = FontAwesome.Sharp.IconChar.Eraser;
+            ClearButton.IconColor = Color.FromArgb(64, 64, 64);
+            ClearButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            ClearButton.ImageScaling = ToolStripItemImageScaling.None;
+            ClearButton.ImageTransparentColor = Color.Magenta;
+            ClearButton.Name = "ClearButton";
+            ClearButton.Padding = new Padding(10, 0, 10, 0);
+            ClearButton.Size = new Size(72, 73);
+            ClearButton.Text = "Clear";
+            ClearButton.TextImageRelation = TextImageRelation.ImageAboveText;
+            ClearButton.Click += ClearButton_Click;
+            // 
+            // Divider2
+            // 
+            Divider2.Name = "Divider2";
+            Divider2.Size = new Size(6, 76);
+            // 
+            // PlayButton
+            // 
+            PlayButton.Alignment = ToolStripItemAlignment.Right;
+            PlayButton.Font = new Font("Fira Code", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            PlayButton.ForeColor = Color.Black;
+            PlayButton.IconChar = FontAwesome.Sharp.IconChar.Play;
+            PlayButton.IconColor = Color.FromArgb(101, 239, 67);
+            PlayButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            PlayButton.ImageAlign = ContentAlignment.TopCenter;
+            PlayButton.ImageScaling = ToolStripItemImageScaling.None;
+            PlayButton.ImageTransparentColor = Color.Magenta;
+            PlayButton.Name = "PlayButton";
+            PlayButton.Padding = new Padding(10, 0, 10, 0);
+            PlayButton.Size = new Size(72, 73);
+            PlayButton.Text = "Play";
+            PlayButton.TextImageRelation = TextImageRelation.ImageAboveText;
+            PlayButton.Click += PlayButton_Click;
+            // 
+            // RightDivider
+            // 
+            RightDivider.Alignment = ToolStripItemAlignment.Right;
+            RightDivider.Name = "RightDivider";
+            RightDivider.Size = new Size(6, 76);
             // 
             // Playback
             // 
@@ -274,12 +360,13 @@
             macroLog.Dock = DockStyle.Fill;
             macroLog.GridColor = SystemColors.ActiveCaptionText;
             macroLog.Location = new Point(0, 0);
-            macroLog.Margin = new Padding(3, 4, 3, 4);
+            macroLog.Margin = new Padding(10);
             macroLog.Name = "macroLog";
             macroLog.ReadOnly = true;
             macroLog.RowTemplate.Height = 25;
-            macroLog.Size = new Size(769, 615);
+            macroLog.Size = new Size(769, 590);
             macroLog.TabIndex = 2;
+            macroLog.DataError += macroLog_DataError;
             // 
             // splitContainer1
             // 
@@ -294,7 +381,7 @@
             // 
             // splitContainer1.Panel2
             // 
-            splitContainer1.Panel2.Controls.Add(macroLog);
+            splitContainer1.Panel2.Controls.Add(toolStripContainer1);
             splitContainer1.Panel2.ForeColor = Color.Black;
             splitContainer1.Size = new Size(1132, 615);
             splitContainer1.SplitterDistance = 359;
@@ -309,6 +396,175 @@
             toolStrip2.Size = new Size(26, 615);
             toolStrip2.TabIndex = 0;
             toolStrip2.Text = "toolStrip2";
+            // 
+            // toolStripContainer1
+            // 
+            toolStripContainer1.BottomToolStripPanelVisible = false;
+            // 
+            // toolStripContainer1.ContentPanel
+            // 
+            toolStripContainer1.ContentPanel.Controls.Add(panel1);
+            toolStripContainer1.ContentPanel.Size = new Size(769, 590);
+            toolStripContainer1.Dock = DockStyle.Fill;
+            toolStripContainer1.LeftToolStripPanelVisible = false;
+            toolStripContainer1.Location = new Point(0, 0);
+            toolStripContainer1.Name = "toolStripContainer1";
+            toolStripContainer1.RightToolStripPanelVisible = false;
+            toolStripContainer1.Size = new Size(769, 615);
+            toolStripContainer1.TabIndex = 3;
+            toolStripContainer1.Text = "toolStripContainer1";
+            // 
+            // toolStripContainer1.TopToolStripPanel
+            // 
+            toolStripContainer1.TopToolStripPanel.Controls.Add(toolStrip1);
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(statusStrip1);
+            panel1.Controls.Add(macroLog);
+            panel1.Dock = DockStyle.Fill;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(769, 590);
+            panel1.TabIndex = 3;
+            // 
+            // toolStrip1
+            // 
+            toolStrip1.Dock = DockStyle.None;
+            toolStrip1.GripStyle = ToolStripGripStyle.Hidden;
+            toolStrip1.Items.AddRange(new ToolStripItem[] { newToolStripButton, openToolStripButton, saveToolStripButton, printToolStripButton, toolStripSeparator, cutToolStripButton, copyToolStripButton, pasteToolStripButton, toolStripSeparator2, helpToolStripButton, toolStripTextBox1, iconToolStripButton1, toolStripSeparator3 });
+            toolStrip1.Location = new Point(3, 0);
+            toolStrip1.Name = "toolStrip1";
+            toolStrip1.Size = new Size(766, 25);
+            toolStrip1.TabIndex = 0;
+            // 
+            // newToolStripButton
+            // 
+            newToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            newToolStripButton.Image = (Image)resources.GetObject("newToolStripButton.Image");
+            newToolStripButton.ImageTransparentColor = Color.Magenta;
+            newToolStripButton.Name = "newToolStripButton";
+            newToolStripButton.Size = new Size(23, 22);
+            newToolStripButton.Text = "&New";
+            // 
+            // openToolStripButton
+            // 
+            openToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            openToolStripButton.Image = (Image)resources.GetObject("openToolStripButton.Image");
+            openToolStripButton.ImageTransparentColor = Color.Magenta;
+            openToolStripButton.Name = "openToolStripButton";
+            openToolStripButton.Size = new Size(23, 22);
+            openToolStripButton.Text = "&Open";
+            // 
+            // saveToolStripButton
+            // 
+            saveToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            saveToolStripButton.Image = (Image)resources.GetObject("saveToolStripButton.Image");
+            saveToolStripButton.ImageTransparentColor = Color.Magenta;
+            saveToolStripButton.Name = "saveToolStripButton";
+            saveToolStripButton.Size = new Size(23, 22);
+            saveToolStripButton.Text = "&Save";
+            // 
+            // printToolStripButton
+            // 
+            printToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            printToolStripButton.Image = (Image)resources.GetObject("printToolStripButton.Image");
+            printToolStripButton.ImageTransparentColor = Color.Magenta;
+            printToolStripButton.Name = "printToolStripButton";
+            printToolStripButton.Size = new Size(23, 22);
+            printToolStripButton.Text = "&Print";
+            // 
+            // toolStripSeparator
+            // 
+            toolStripSeparator.Name = "toolStripSeparator";
+            toolStripSeparator.Size = new Size(6, 25);
+            // 
+            // cutToolStripButton
+            // 
+            cutToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            cutToolStripButton.Image = (Image)resources.GetObject("cutToolStripButton.Image");
+            cutToolStripButton.ImageTransparentColor = Color.Magenta;
+            cutToolStripButton.Name = "cutToolStripButton";
+            cutToolStripButton.Size = new Size(23, 22);
+            cutToolStripButton.Text = "C&ut";
+            // 
+            // copyToolStripButton
+            // 
+            copyToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            copyToolStripButton.Image = (Image)resources.GetObject("copyToolStripButton.Image");
+            copyToolStripButton.ImageTransparentColor = Color.Magenta;
+            copyToolStripButton.Name = "copyToolStripButton";
+            copyToolStripButton.Size = new Size(23, 22);
+            copyToolStripButton.Text = "&Copy";
+            // 
+            // pasteToolStripButton
+            // 
+            pasteToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            pasteToolStripButton.Image = (Image)resources.GetObject("pasteToolStripButton.Image");
+            pasteToolStripButton.ImageTransparentColor = Color.Magenta;
+            pasteToolStripButton.Name = "pasteToolStripButton";
+            pasteToolStripButton.Size = new Size(23, 22);
+            pasteToolStripButton.Text = "&Paste";
+            // 
+            // toolStripSeparator2
+            // 
+            toolStripSeparator2.Name = "toolStripSeparator2";
+            toolStripSeparator2.Size = new Size(6, 25);
+            // 
+            // helpToolStripButton
+            // 
+            helpToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            helpToolStripButton.Image = (Image)resources.GetObject("helpToolStripButton.Image");
+            helpToolStripButton.ImageTransparentColor = Color.Magenta;
+            helpToolStripButton.Name = "helpToolStripButton";
+            helpToolStripButton.Size = new Size(23, 22);
+            helpToolStripButton.Text = "He&lp";
+            // 
+            // toolStripTextBox1
+            // 
+            toolStripTextBox1.Alignment = ToolStripItemAlignment.Right;
+            toolStripTextBox1.BorderStyle = BorderStyle.FixedSingle;
+            toolStripTextBox1.Name = "toolStripTextBox1";
+            toolStripTextBox1.Size = new Size(250, 25);
+            // 
+            // iconToolStripButton1
+            // 
+            iconToolStripButton1.Alignment = ToolStripItemAlignment.Right;
+            iconToolStripButton1.IconChar = FontAwesome.Sharp.IconChar.Database;
+            iconToolStripButton1.IconColor = Color.FromArgb(64, 64, 64);
+            iconToolStripButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            iconToolStripButton1.ImageTransparentColor = Color.Magenta;
+            iconToolStripButton1.Name = "iconToolStripButton1";
+            iconToolStripButton1.Size = new Size(93, 22);
+            iconToolStripButton1.Text = "Data Source:";
+            iconToolStripButton1.ToolTipText = "Data Source";
+            // 
+            // toolStripSeparator3
+            // 
+            toolStripSeparator3.Alignment = ToolStripItemAlignment.Right;
+            toolStripSeparator3.Margin = new Padding(300, 0, 0, 0);
+            toolStripSeparator3.Name = "toolStripSeparator3";
+            toolStripSeparator3.Size = new Size(6, 25);
+            // 
+            // statusStrip1
+            // 
+            statusStrip1.Items.AddRange(new ToolStripItem[] { StatusLabel, toolStripProgressBar1 });
+            statusStrip1.Location = new Point(0, 568);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new Size(769, 22);
+            statusStrip1.TabIndex = 3;
+            statusStrip1.Text = "statusStrip1";
+            // 
+            // StatusLabel
+            // 
+            StatusLabel.Name = "StatusLabel";
+            StatusLabel.Size = new Size(42, 17);
+            StatusLabel.Text = "Status:";
+            // 
+            // toolStripProgressBar1
+            // 
+            toolStripProgressBar1.Name = "toolStripProgressBar1";
+            toolStripProgressBar1.Size = new Size(100, 16);
             // 
             // MainForm
             // 
@@ -340,6 +596,17 @@
             splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
+            toolStripContainer1.ContentPanel.ResumeLayout(false);
+            toolStripContainer1.TopToolStripPanel.ResumeLayout(false);
+            toolStripContainer1.TopToolStripPanel.PerformLayout();
+            toolStripContainer1.ResumeLayout(false);
+            toolStripContainer1.PerformLayout();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            toolStrip1.ResumeLayout(false);
+            toolStrip1.PerformLayout();
+            statusStrip1.ResumeLayout(false);
+            statusStrip1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -368,5 +635,30 @@
         private ToolStrip toolStrip2;
         private FontAwesome.Sharp.IconToolStripButton AddStepButton;
         private FontAwesome.Sharp.IconToolStripButton SelectObjectButton;
+        private ToolStripSeparator Divider1;
+        private FontAwesome.Sharp.IconToolStripButton ClearButton;
+        private ToolStripSeparator Divider2;
+        private FontAwesome.Sharp.IconToolStripButton SaveScript;
+        private ToolStripSeparator RightDivider;
+        private ToolStripSeparator RightDivider1;
+        private Panel panel1;
+        private ToolStripContainer toolStripContainer1;
+        private ToolStrip toolStrip1;
+        private ToolStripButton newToolStripButton;
+        private ToolStripButton openToolStripButton;
+        private ToolStripButton saveToolStripButton;
+        private ToolStripButton printToolStripButton;
+        private ToolStripSeparator toolStripSeparator;
+        private ToolStripButton cutToolStripButton;
+        private ToolStripButton copyToolStripButton;
+        private ToolStripButton pasteToolStripButton;
+        private ToolStripSeparator toolStripSeparator2;
+        private ToolStripButton helpToolStripButton;
+        private ToolStripTextBox toolStripTextBox1;
+        private FontAwesome.Sharp.IconToolStripButton iconToolStripButton1;
+        private ToolStripSeparator toolStripSeparator3;
+        private StatusStrip statusStrip1;
+        private ToolStripStatusLabel StatusLabel;
+        private ToolStripProgressBar toolStripProgressBar1;
     }
 }

@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace CTI_RPA.SYS
+﻿namespace CTI_RPA.SYS
 {
-    public partial class LoaderIntro : System.Windows.Forms.Form
+    public partial class LoaderIntro : Form
     {
         public LoaderIntro()
         {
@@ -24,7 +14,7 @@ namespace CTI_RPA.SYS
         {
             if (InvokeRequired)
             {
-                Invoke(new Action(CloseLoadingScreen));
+                Invoke(CloseLoadingScreen);
                 return;
             }
             Close();

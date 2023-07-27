@@ -1,11 +1,14 @@
-﻿namespace CTI_RPA.SYS
+﻿using System.ComponentModel;
+using Timer = System.Windows.Forms.Timer;
+
+namespace CTI_RPA.SYS
 {
     partial class LoaderIntro
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -21,8 +24,7 @@
         }
 
         #region Windows Form Designer generated code
-
-        /// <summary>
+        /// <summary> 
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
@@ -143,7 +145,7 @@
         private Label LoadingLabel;
         private Panel LoadingBar;
         private Panel filled;
-        private System.Windows.Forms.Timer LoadingTimer;
+        private Timer LoadingTimer;
         private Label ownerLabel;
         private Label versionLabel;
         private PictureBox pictureBox1;

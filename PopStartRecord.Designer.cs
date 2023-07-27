@@ -32,12 +32,15 @@
             StartButton = new Button();
             CancelButton = new Button();
             QuestionLabel = new Label();
+            iconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
+            ((System.ComponentModel.ISupportInitialize)iconPictureBox1).BeginInit();
             SuspendLayout();
             // 
             // StartButton
             // 
-            StartButton.BackColor = Color.FromArgb(101, 239, 67);
+            StartButton.BackColor = Color.FromArgb(255, 128, 0);
             resources.ApplyResources(StartButton, "StartButton");
+            StartButton.ForeColor = SystemColors.ButtonFace;
             StartButton.Name = "StartButton";
             StartButton.UseVisualStyleBackColor = false;
             StartButton.Click += StartButton_Click;
@@ -53,20 +56,33 @@
             // QuestionLabel
             // 
             resources.ApplyResources(QuestionLabel, "QuestionLabel");
-            QuestionLabel.ForeColor = SystemColors.ButtonFace;
+            QuestionLabel.ForeColor = SystemColors.ActiveCaptionText;
             QuestionLabel.Name = "QuestionLabel";
+            // 
+            // iconPictureBox1
+            // 
+            iconPictureBox1.BackColor = Color.WhiteSmoke;
+            iconPictureBox1.ForeColor = Color.Red;
+            iconPictureBox1.IconChar = FontAwesome.Sharp.IconChar.Circle;
+            iconPictureBox1.IconColor = Color.Red;
+            iconPictureBox1.IconFont = FontAwesome.Sharp.IconFont.Solid;
+            resources.ApplyResources(iconPictureBox1, "iconPictureBox1");
+            iconPictureBox1.Name = "iconPictureBox1";
+            iconPictureBox1.TabStop = false;
             // 
             // PopStartRecord
             // 
             resources.ApplyResources(this, "$this");
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(63, 61, 86);
+            BackColor = Color.WhiteSmoke;
+            Controls.Add(iconPictureBox1);
             Controls.Add(QuestionLabel);
             Controls.Add(CancelButton);
             Controls.Add(StartButton);
             FormBorderStyle = FormBorderStyle.None;
             MaximizeBox = false;
             Name = "PopStartRecord";
+            ((System.ComponentModel.ISupportInitialize)iconPictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -76,5 +92,6 @@
         private Button StartButton;
         private Button CancelButton;
         private Label QuestionLabel;
+        private FontAwesome.Sharp.IconPictureBox iconPictureBox1;
     }
 }
