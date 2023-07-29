@@ -30,17 +30,17 @@ namespace CTI_RPA.SYS
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoaderIntro));
+            components = new Container();
+            ComponentResourceManager resources = new ComponentResourceManager(typeof(LoaderIntro));
             LoadingLabel = new Label();
             LoadingBar = new Panel();
             filled = new Panel();
-            LoadingTimer = new System.Windows.Forms.Timer(components);
+            LoadingTimer = new Timer(components);
             ownerLabel = new Label();
             versionLabel = new Label();
             pictureBox1 = new PictureBox();
             LoadingBar.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // LoadingLabel
@@ -87,7 +87,7 @@ namespace CTI_RPA.SYS
             ownerLabel.FlatStyle = FlatStyle.Flat;
             ownerLabel.Font = new Font("Fira Code", 11.2499981F, FontStyle.Regular, GraphicsUnit.Point);
             ownerLabel.ForeColor = Color.WhiteSmoke;
-            ownerLabel.Location = new Point(0, 60);
+            ownerLabel.Location = new Point(12, 58);
             ownerLabel.Name = "ownerLabel";
             ownerLabel.Size = new Size(253, 24);
             ownerLabel.TabIndex = 2;
@@ -100,7 +100,7 @@ namespace CTI_RPA.SYS
             versionLabel.FlatStyle = FlatStyle.Flat;
             versionLabel.Font = new Font("Fira Code", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             versionLabel.ForeColor = Color.WhiteSmoke;
-            versionLabel.Location = new Point(368, 148);
+            versionLabel.Location = new Point(356, 148);
             versionLabel.Name = "versionLabel";
             versionLabel.Size = new Size(98, 21);
             versionLabel.TabIndex = 3;
@@ -109,9 +109,9 @@ namespace CTI_RPA.SYS
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(12, 238);
+            pictureBox1.Location = new Point(12, 198);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(428, 355);
+            pictureBox1.Size = new Size(442, 388);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 4;
             pictureBox1.TabStop = false;
@@ -129,13 +129,14 @@ namespace CTI_RPA.SYS
             Controls.Add(pictureBox1);
             Font = new Font("Fira Code", 8.999999F, FontStyle.Regular, GraphicsUnit.Point);
             FormBorderStyle = FormBorderStyle.None;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 4, 3, 4);
             Name = "LoaderIntro";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "LoaderIntro";
             Load += LoaderIntro_Load;
             LoadingBar.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }

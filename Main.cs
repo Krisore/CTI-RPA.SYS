@@ -1,12 +1,10 @@
-
 using CTI_RPA.SYS.Services.Interface;
-
 namespace CTI_RPA.SYS
 {
     public partial class MainForm : Form
     {
         /// <summary>
-        ///  Represents the main form of the CTI_RPA application for recording macro actions.
+        /// Represents the main form of the CTI_RPA application for recording macro actions.
         /// </summary>
         public readonly BindingSource BindingSource = new();
         private readonly IMacroService _macroService;
@@ -38,6 +36,7 @@ namespace CTI_RPA.SYS
         private void RecordButton_Click(object sender, EventArgs e)
         {
             RecordButton.Enabled = false;
+            StopButton.Enabled = true;
             WindowState = FormWindowState.Minimized;
             macroLog.ReadOnly = true;
             if (PopDialogResult() == DialogResult.OK)
@@ -66,9 +65,8 @@ namespace CTI_RPA.SYS
         {
             WindowState = FormWindowState.Minimized;
             RecordButton.Enabled = true;
-            StopButton.Enabled = true;
-            _macroService.PlayMacroActions();
             StopButton.Enabled = false;
+            _macroService.PlayMacroActions();
         }
         private void ClearButton_Click(object sender, EventArgs e)
         {
@@ -82,7 +80,7 @@ namespace CTI_RPA.SYS
             BindingSource.ResetBindings(false);
 
         }
-        private void macroLog_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        private void MacroLog_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             if (e.Context == DataGridViewDataErrorContexts.Formatting)
             {
@@ -105,10 +103,43 @@ namespace CTI_RPA.SYS
             // Mark the error as handled to prevent further default error handling
             e.ThrowException = false;
         }
+        private void SaveToolStripButton_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show(@"Save Script", @"Save your recorded script?", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            if (result == DialogResult.OK && !_macroService.IsMacroActionsNull())
+            {
+                _macroService.SaveScript(_macroService.MacroActions, @"C:\Users\kriso\source\repos\Krisore\CTI-RPA.SYS\SavedFile\test.xlsx");
+            }
+            else
+            {
+                MessageBox.Show(@"No recorded Macro", @"Tch. ", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
+        private void InsertScriptButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog()
+            {
+                Filter = @"Excel Files|*.xls;*.xlsx;*.xlsm",
+                Title = @"Select a Excel File"
+            };
+            if (openFileDialog.ShowDialog() != DialogResult.OK) return;
+            var result = MessageBox.Show(@"Script will be loaded, Are you sure?", @"Insert Script", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            if (result != DialogResult.OK) return;
+            _macroService.InsertScript(openFileDialog.FileName);
+            MessageBox.Show(@"Script is loaded from Excel successfully!", @"Load from Excel", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            BindingSource.ResetBindings(false);
+            RecordButton.Enabled = false;
+            PlayButton.Enabled = true;
+            StopButton.Enabled = false;
+            ClearButton.Enabled = true;
+        }
 
-        //TODO: Minimize or Hide the Main Form while recording or playback. 
+        //TODO: Minimize or Hide the Main Form while recording or playback.
         //TODO: Add a key shortcut to stop the recording
         //TODO: Add Step for manual edit of script.
         //TODO: Select Object for manual select of step.
+        //TODO: File Explorer & File management
+        //TODO: Enhance async Task 
     }
 }

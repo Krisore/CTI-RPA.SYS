@@ -15,11 +15,9 @@ namespace CTI_RPA.SYS
             // Note: The main entry point for the application.
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
-            
             ApplicationConfiguration.Initialize();
             var loaderIntro = new LoaderIntro();
             Application.Run(loaderIntro);
-
             //Main Form Initialization
             IMacroService macroService = new MacroService(Hook.GlobalEvents());
             var mainForm = new MainForm(macroService);
