@@ -11,21 +11,49 @@ namespace CTI_RPA.SYS.Services
     /// </summary>
     public class MacroService : IMacroService
     {
-        private IKeyboardMouseEvents _mGlobalHook;
+        private IKeyboardMouseEvents? _mGlobalHook;
+        const int INTERPOLATION_STEPS = 10;
         public  List<MacroAction> MacroActions { get; set; } = new ();
         public BindingSource MacroActionsBindingSource { get; } = new ();
-        public MacroService(IKeyboardMouseEvents mGlobalHook)
+        public MacroService()
         {
-            _mGlobalHook = mGlobalHook;
             MacroActionsBindingSource.DataSource = MacroActions;
         }
-
         public void Subscribe()
         {
             _mGlobalHook = Hook.GlobalEvents();
-            //_mGlobalHook.KeyDown += GlobalHookKeyDown;
             _mGlobalHook.KeyPress += GlobalHookKeyPress;
             _mGlobalHook.MouseDownExt += GlobalHookMouseDownExt;
+            _mGlobalHook.MouseWheelExt += GlobalHookMouseWheelExt;
+            //_mGlobalHook.MouseMoveExt += GlobalHookMouseMoveExt;
+        }
+        #region GlobalHookMouseMove
+        //private void GlobalHookMouseMoveExt(object? sender, MouseEventExtArgs e)
+        //{
+        //    var macroAction = new MacroAction()
+        //    {
+        //        MacroActionType = MacroActionType.MouseMove,
+        //        EventName = $"{e.Location}",
+        //        EventParameters = $"{e.X},{e.Y}",
+        //        Value = $"{e.Clicks}",
+        //        Comment = ""
+        //    };
+        //    MacroActions.Add(macroAction);
+        //    MacroActionsBindingSource.ResetBindings(false);
+        //}
+        #endregion 
+        private void GlobalHookMouseWheelExt(object? sender, MouseEventExtArgs e)
+        {
+            var macroAction = new MacroAction()
+            {
+                MacroActionType = MacroActionType.MouseWheel,
+                EventName = $"Mouse Wheel: '{e.Delta}'",
+                EventParameters = $"{e.Delta}",
+                Value = $"Mouse wheel move at {e.Delta}",
+                Comment = ""
+            };
+            MacroActions.Add(macroAction);
+            MacroActionsBindingSource.ResetBindings(false);
         }
         //Note: KeyDown event for global hook.
         #region GlobalHookKeyDown
@@ -63,6 +91,7 @@ namespace CTI_RPA.SYS.Services
             //_mGlobalHook.KeyDown += GlobalHookKeyDown; On Global key including special keys.
             _mGlobalHook.KeyPress -= GlobalHookKeyPress;
             _mGlobalHook.MouseDownExt -= GlobalHookMouseDownExt;
+            _mGlobalHook.MouseWheelExt += GlobalHookMouseWheelExt;
             _mGlobalHook.Dispose();
         }
         public void GlobalHookMouseDownExt(object? sender, MouseEventExtArgs e)
@@ -131,9 +160,32 @@ namespace CTI_RPA.SYS.Services
                         break;
                     }
                     case MacroActionType.MouseMove:
+                        {
+                            //int xStart = Cursor.Position.X, yStart = Cursor.Position.Y;
+                            //var parameters = action.EventParameters.Split(",");
+                            //int xEnd = 0, yEnd = 0;
+                            //if (parameters.Length == 2)
+                            //{
+                            //    int.TryParse(parameters[0], out xEnd);
+                            //    int.TryParse(parameters[1], out yEnd);
+                            //}
+                            //for (int i = 0; i <= INTERPOLATION_STEPS; i++)
+                            //{
+                            //    int currentX = Interpolate(xStart, xEnd, i, INTERPOLATION_STEPS);
+                            //    int currentY = Interpolate(yStart, yEnd, i, INTERPOLATION_STEPS);
+                            //    Cursor.Position = new Point(currentX, currentY);
+                            //}
+                        }
                         break;
                     case MacroActionType.MouseWheel:
+                    {
+                            int delta = 0;
+                            if (int.TryParse(action.EventParameters, out delta))
+                            {
+                                inputSimulator.Mouse.VerticalScroll(delta);
+                            }
                         break;
+                    }
                     case MacroActionType.Interval:
                         break;
                     default:
@@ -141,6 +193,10 @@ namespace CTI_RPA.SYS.Services
                 }
                 Thread.Sleep(300);
             }
+        }
+        private int Interpolate(int start, int end, int currentStep, int totalStep)
+        {
+            return start + ((end - start) * currentStep / totalStep);
         }
         private static VirtualKeyCode GetModifierKeyCode(string modifier)
         {
@@ -152,74 +208,11 @@ namespace CTI_RPA.SYS.Services
                 _ => VirtualKeyCode.None,
             };
         }
-        public void SaveScript(List<MacroAction> macroActions, string filePath)
+        public void OnLoadScript(List<MacroAction> loadedMacroActions)
         {
-            using var package = new ExcelPackage();
-            var worksheet = package.Workbook.Worksheets.Add("MacroActions");
-
-            // Add headers to the worksheet
-            worksheet.Cells[1, 1].Value = "MacroActionType";
-            worksheet.Cells[1, 2].Value = "EventName";
-            worksheet.Cells[1, 3].Value = "EventParameters";
-            worksheet.Cells[1, 4].Value = "Value";
-            worksheet.Cells[1, 5].Value = "Comment";
-            // Add data to the worksheet
-            for (int i = 0; i < macroActions.Count; i++)
-            {
-                worksheet.Cells[i + 2, 1].Value = macroActions[i].MacroActionType.ToString();
-                worksheet.Cells[i + 2, 2].Value = macroActions[i].EventName;
-                worksheet.Cells[i + 2, 3].Value = macroActions[i].EventParameters;
-                worksheet.Cells[i + 2, 4].Value = macroActions[i].Value;
-                worksheet.Cells[i + 2, 5].Value = macroActions[i].Comment;
-            }
-            // Save the Excel package to the specified file path
-            package.SaveAs(new FileInfo(filePath));
-        }
-        public void InsertScript(string filePath)
-        {
-            List<MacroAction> loadedMacroActions = ReadFromExcel(filePath);
             MacroActions.Clear();
             MacroActions.AddRange(loadedMacroActions);
             MacroActionsBindingSource.ResetBindings(false);
-        }
-        private List<MacroAction> ReadFromExcel(string filePath)
-        {
-            List<MacroAction> macroActions = new List<MacroAction>();
-            try
-            {
-                FileInfo file = new FileInfo(filePath);
-
-                using (ExcelPackage package = new ExcelPackage(file))
-                {
-                    ExcelWorksheet worksheet = package.Workbook.Worksheets.FirstOrDefault();
-
-                    if (worksheet != null)
-                    {
-                        int rowCount = worksheet.Dimension.Rows;
-
-                        for (int i = 2; i <= rowCount; i++) // Start from the second row (assuming headers are in the first row)
-                        {
-                            MacroAction macroAction = new MacroAction();
-
-                            macroAction.MacroActionType = Enum.Parse<MacroActionType>(worksheet.Cells[i, 1].Value?.ToString() ?? "");
-
-                            macroAction.EventName = worksheet.Cells[i, 2].Value?.ToString() ?? "";
-                            macroAction.EventParameters = worksheet.Cells[i, 3].Value?.ToString() ?? "";
-                            macroAction.Value = worksheet.Cells[i, 4].Value?.ToString() ?? "";
-                            macroAction.Comment = worksheet.Cells[i, 5].Value?.ToString() ?? "";
-
-                            macroActions.Add(macroAction);
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                // Handle any exceptions that might occur during reading from the Excel file
-                MessageBox.Show("Error reading data from the Excel file: " + ex.Message, @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            return macroActions;
         }
     }
 }

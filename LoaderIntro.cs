@@ -19,7 +19,7 @@
             }
             Close();
         }
-        private void LoadingTimer_Tick(object sender, EventArgs e)
+        private void LoadingTimer_Tick_1(object sender, EventArgs e)
         {
             filled.Width += 3;
             if (filled.Width >= 466)

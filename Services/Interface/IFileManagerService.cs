@@ -5,6 +5,7 @@ namespace CTI_RPA.SYS.Services.Interface
 {
     public interface IFileManagerService
     {
-        public void SaveFile(List<MacroAction> macroActions);
+        public void SaveFile(List<MacroAction> macroActions, string filePath);
+        public List<MacroAction> LoadFile(string filePath);
     }
 }

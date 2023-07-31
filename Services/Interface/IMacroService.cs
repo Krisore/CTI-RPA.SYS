@@ -17,8 +17,6 @@ namespace CTI_RPA.SYS.Services.Interface
         public bool IsMacroActionsNull();
         public void ClearMacroActions();
         public void PlayMacroActions();
-        public void SaveScript(List<MacroAction> macroActions, string filePath);
-
-        void InsertScript(string filePath);
+        public void OnLoadScript(List<MacroAction> loadedMacroActions);
     }
 }

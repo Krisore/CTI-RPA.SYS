@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CTI_RPA.SYS.Services.Interface
 {
-    internal interface IScreenService
+    public interface IScreenService
     {
     }
 }
