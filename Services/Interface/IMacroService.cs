@@ -16,7 +16,7 @@ namespace CTI_RPA.SYS.Services.Interface
         public void Unsubscribe();
         public bool IsMacroActionsNull();
         public void ClearMacroActions();
-        public void PlayMacroActions();
+        public Task PlayMacroActions();
         public void OnLoadScript(List<MacroAction> loadedMacroActions);
     }
 }

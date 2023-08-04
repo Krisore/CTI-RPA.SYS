@@ -21,5 +21,10 @@ namespace CTI_RPA.SYS.Model
         public string EventParameters { get; set; } = string.Empty;
         public string Value { get; set; } = string.Empty;
         public string Comment { get; set; } = string.Empty;
+        public int Interval { get; set; }
+        public MacroAction()
+        {
+            Interval = 0;
+        }
     }
 }

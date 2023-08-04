@@ -28,115 +28,114 @@ partial class LoaderIntro
     /// </summary>
     private void InitializeComponent()
     {
-        this.components = new System.ComponentModel.Container();
-        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoaderIntro));
-        this.LoadingLabel = new System.Windows.Forms.Label();
-        this.LoadingBar = new System.Windows.Forms.Panel();
-        this.filled = new System.Windows.Forms.Panel();
-        this.LoadingTimer = new System.Windows.Forms.Timer(this.components);
-        this.ownerLabel = new System.Windows.Forms.Label();
-        this.versionLabel = new System.Windows.Forms.Label();
-        this.pictureBox1 = new System.Windows.Forms.PictureBox();
-        this.LoadingBar.SuspendLayout();
-        ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-        this.SuspendLayout();
+        components = new Container();
+        ComponentResourceManager resources = new ComponentResourceManager(typeof(LoaderIntro));
+        LoadingLabel = new Label();
+        LoadingBar = new Panel();
+        filled = new Panel();
+        LoadingTimer = new Timer(components);
+        ownerLabel = new Label();
+        versionLabel = new Label();
+        pictureBox1 = new PictureBox();
+        LoadingBar.SuspendLayout();
+        ((ISupportInitialize)pictureBox1).BeginInit();
+        SuspendLayout();
         // 
         // LoadingLabel
         // 
-        this.LoadingLabel.AutoSize = true;
-        this.LoadingLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(168)))), ((int)(((byte)(38)))));
-        this.LoadingLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-        this.LoadingLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-        this.LoadingLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-        this.LoadingLabel.ForeColor = System.Drawing.Color.WhiteSmoke;
-        this.LoadingLabel.Location = new System.Drawing.Point(43, 83);
-        this.LoadingLabel.Name = "LoadingLabel";
-        this.LoadingLabel.Size = new System.Drawing.Size(369, 33);
-        this.LoadingLabel.TabIndex = 0;
-        this.LoadingLabel.Text = "Robotics Process Application";
-        this.LoadingLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+        LoadingLabel.AutoSize = true;
+        LoadingLabel.BackColor = Color.FromArgb(249, 168, 38);
+        LoadingLabel.BorderStyle = BorderStyle.FixedSingle;
+        LoadingLabel.FlatStyle = FlatStyle.Flat;
+        LoadingLabel.Font = new Font("Microsoft Sans Serif", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
+        LoadingLabel.ForeColor = Color.WhiteSmoke;
+        LoadingLabel.Location = new Point(43, 83);
+        LoadingLabel.Name = "LoadingLabel";
+        LoadingLabel.Size = new Size(369, 33);
+        LoadingLabel.TabIndex = 0;
+        LoadingLabel.Text = "Robotics Process Application";
+        LoadingLabel.TextAlign = ContentAlignment.MiddleLeft;
         // 
         // LoadingBar
         // 
-        this.LoadingBar.Controls.Add(this.filled);
-        this.LoadingBar.Location = new System.Drawing.Point(0, 567);
-        this.LoadingBar.Name = "LoadingBar";
-        this.LoadingBar.Size = new System.Drawing.Size(466, 22);
-        this.LoadingBar.TabIndex = 1;
+        LoadingBar.Controls.Add(filled);
+        LoadingBar.Location = new Point(0, 567);
+        LoadingBar.Name = "LoadingBar";
+        LoadingBar.Size = new Size(466, 22);
+        LoadingBar.TabIndex = 1;
         // 
         // filled
         // 
-        this.filled.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-        this.filled.Location = new System.Drawing.Point(0, 0);
-        this.filled.Name = "filled";
-        this.filled.Size = new System.Drawing.Size(51, 29);
-        this.filled.TabIndex = 0;
+        filled.BackColor = Color.FromArgb(128, 255, 128);
+        filled.Location = new Point(0, 0);
+        filled.Name = "filled";
+        filled.Size = new Size(51, 29);
+        filled.TabIndex = 0;
         // 
         // LoadingTimer
         // 
-        this.LoadingTimer.Enabled = true;
-        this.LoadingTimer.Interval = 15;
-        this.LoadingTimer.Tick += new System.EventHandler(this.LoadingTimer_Tick_1);
+        LoadingTimer.Enabled = true;
+        LoadingTimer.Interval = 15;
+        LoadingTimer.Tick += LoadingTimer_Tick_1;
         // 
         // ownerLabel
         // 
-        this.ownerLabel.AutoSize = true;
-        this.ownerLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(61)))), ((int)(((byte)(86)))));
-        this.ownerLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-        this.ownerLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-        this.ownerLabel.ForeColor = System.Drawing.Color.WhiteSmoke;
-        this.ownerLabel.Location = new System.Drawing.Point(43, 48);
-        this.ownerLabel.Name = "ownerLabel";
-        this.ownerLabel.Size = new System.Drawing.Size(195, 18);
-        this.ownerLabel.TabIndex = 2;
-        this.ownerLabel.Text = "Corporate Technologies Inc.";
+        ownerLabel.AutoSize = true;
+        ownerLabel.BackColor = Color.FromArgb(63, 61, 86);
+        ownerLabel.FlatStyle = FlatStyle.Flat;
+        ownerLabel.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+        ownerLabel.ForeColor = Color.WhiteSmoke;
+        ownerLabel.Location = new Point(43, 48);
+        ownerLabel.Name = "ownerLabel";
+        ownerLabel.Size = new Size(195, 18);
+        ownerLabel.TabIndex = 2;
+        ownerLabel.Text = "Corporate Technologies Inc.";
         // 
         // versionLabel
         // 
-        this.versionLabel.AutoSize = true;
-        this.versionLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(61)))), ((int)(((byte)(86)))));
-        this.versionLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-        this.versionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-        this.versionLabel.ForeColor = System.Drawing.Color.WhiteSmoke;
-        this.versionLabel.Location = new System.Drawing.Point(341, 127);
-        this.versionLabel.Name = "versionLabel";
-        this.versionLabel.Size = new System.Drawing.Size(71, 16);
-        this.versionLabel.TabIndex = 3;
-        this.versionLabel.Text = "version 1.0";
+        versionLabel.AutoSize = true;
+        versionLabel.BackColor = Color.FromArgb(63, 61, 86);
+        versionLabel.FlatStyle = FlatStyle.Flat;
+        versionLabel.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+        versionLabel.ForeColor = Color.WhiteSmoke;
+        versionLabel.Location = new Point(388, 130);
+        versionLabel.Name = "versionLabel";
+        versionLabel.Size = new Size(24, 16);
+        versionLabel.TabIndex = 3;
+        versionLabel.Text = "v.1";
         // 
         // pictureBox1
         // 
-        this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-        this.pictureBox1.Location = new System.Drawing.Point(12, 173);
-        this.pictureBox1.Name = "pictureBox1";
-        this.pictureBox1.Size = new System.Drawing.Size(442, 388);
-        this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-        this.pictureBox1.TabIndex = 4;
-        this.pictureBox1.TabStop = false;
+        pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+        pictureBox1.Location = new Point(12, 173);
+        pictureBox1.Name = "pictureBox1";
+        pictureBox1.Size = new Size(442, 388);
+        pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+        pictureBox1.TabIndex = 4;
+        pictureBox1.TabStop = false;
         // 
         // LoaderIntro
         // 
-        this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-        this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-        this.BackColor = System.Drawing.Color.White;
-        this.ClientSize = new System.Drawing.Size(466, 590);
-        this.Controls.Add(this.LoadingLabel);
-        this.Controls.Add(this.versionLabel);
-        this.Controls.Add(this.ownerLabel);
-        this.Controls.Add(this.LoadingBar);
-        this.Controls.Add(this.pictureBox1);
-        this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-        this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-        this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-        this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-        this.Name = "LoaderIntro";
-        this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-        this.Text = "LoaderIntro";
-        this.LoadingBar.ResumeLayout(false);
-        ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-        this.ResumeLayout(false);
-        this.PerformLayout();
-
+        AutoScaleDimensions = new SizeF(7F, 15F);
+        AutoScaleMode = AutoScaleMode.Font;
+        BackColor = Color.White;
+        ClientSize = new Size(466, 590);
+        Controls.Add(LoadingLabel);
+        Controls.Add(versionLabel);
+        Controls.Add(ownerLabel);
+        Controls.Add(LoadingBar);
+        Controls.Add(pictureBox1);
+        Font = new Font("Microsoft Sans Serif", 8.999999F, FontStyle.Regular, GraphicsUnit.Point);
+        FormBorderStyle = FormBorderStyle.None;
+        Icon = (Icon)resources.GetObject("$this.Icon");
+        Margin = new Padding(3, 4, 3, 4);
+        Name = "LoaderIntro";
+        StartPosition = FormStartPosition.CenterScreen;
+        Text = "LoaderIntro";
+        LoadingBar.ResumeLayout(false);
+        ((ISupportInitialize)pictureBox1).EndInit();
+        ResumeLayout(false);
+        PerformLayout();
     }
 
     #endregion

@@ -77,19 +77,6 @@ public partial class MainForm : Form
         // Mark the error as handled to prevent further default error handling
         e.ThrowException = false;
     }
-    private void SaveToolStripButton_Click(object sender, EventArgs e)
-    {
-        var result = MessageBox.Show(@"Save Script", @"Save your recorded script?", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-        if (result == DialogResult.OK && !_macroService.IsMacroActionsNull())
-        {
-            fileManager.SaveFile(_macroService.MacroActions, @"C:\Users\OJT\source\repos\Krisore\CTI-RPA.SYS\SavedFile\test.xlsx");
-        }
-        else
-        {
-            MessageBox.Show(@"No recorded Macro", @"Tch. ", MessageBoxButtons.OK,
-                MessageBoxIcon.Error);
-        }
-    }
     private void InsertScriptButton_Click(object sender, EventArgs e)
     {
         OpenFileDialog openFileDialog = new OpenFileDialog()
@@ -135,9 +122,31 @@ public partial class MainForm : Form
         StopButton.Enabled = false;
         ClearButton.Enabled = false;
     }
+    private void saveToolStripButton_Click_1(object sender, EventArgs e)
+    {
+        if (_macroService.IsMacroActionsNull())
+        {
+            MessageBox.Show(@"No recorded Macro", @"Please Create Script First. ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
+        }
+        using var saveFileDialog = new SaveFileDialog();
+        saveFileDialog.Title = @"Save your recorded script";
+        saveFileDialog.Filter = @"Excel Files (*.xlsx)|*.xlsx|All Files (*.*)|*.*";
+        saveFileDialog.DefaultExt = "xlsx";
+        saveFileDialog.InitialDirectory = @"C:\Users\kriso\source\repos\Krisore\CTI-RPA.SYS\SavedFile"; // Set your initial directory here
+        if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
+        var filePath = saveFileDialog.FileName;
+        try
+        {
+            fileManager.SaveFile(_macroService.MacroActions, filePath);
+            MessageBox.Show(@"Script saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($@"An error occurred while saving the script: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+    }
     //Note: Minimize or Hide the Main Form while recording or playback.
-    //Undone: Inserting Data Source
-    //Undone: Reading key shorcut
     //TODO: Add a key shortcut to stop the recording
     //TODO: Add Step for manual edit of script.
     //TODO: Select Object for manual select of step.

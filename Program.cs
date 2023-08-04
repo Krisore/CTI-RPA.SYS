@@ -14,9 +14,7 @@ internal static class Program
     private static void Main()
     {
         // Note: The main entry point for the application.
-        // To customize application configuration such as set high DPI settings or default font,
-        // see https://aka.ms/applicationconfiguration.s
-        ApplicationConfiguration.Initialize();
+        // To customize application configuration such as set high DPI settings or default font,ApplicationConfiguration.Initialize();
         var loaderIntro = new LoaderIntro();
         Application.Run(loaderIntro);
         // Main Form Initialization
@@ -32,7 +30,8 @@ internal static class Program
         }
     }
     public static IServiceProvider? ServiceProvider { get; private set; }
-    static IHostBuilder CreateHostBuilder()
+
+    private static IHostBuilder CreateHostBuilder()
     {
         return Host.CreateDefaultBuilder()
             .ConfigureServices((context, services) => {
